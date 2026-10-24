@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply overflow-x-hidden bg-brand-50/60 font-sans text-slate-800 antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display font-semibold tracking-tight text-slate-900;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-600;
+  }
+}
+
+@layer components {
+  /* Shared page width: wide on big screens, comfortable gutters everywhere. */
+  .page {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-10;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-700 px-6 py-3 text-sm font-semibold text-white shadow-sm
+      transition hover:bg-brand-800 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-brand-700;
+  }
+  .btn-sm {
+    @apply px-4 py-2;
+  }
+  .btn-outline {
+    @apply border border-brand-700 bg-transparent text-brand-800 shadow-none hover:bg-brand-100 disabled:hover:bg-transparent;
+  }
+  .input {
+    @apply w-full rounded-xl border border-brand-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm
+      placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200;
+  }
+  .chip {
+    @apply shrink-0 whitespace-nowrap rounded-full border border-brand-200 bg-white px-4 py-1.5 text-sm text-slate-700 transition hover:border-brand-400;
+  }
+  .chip-on {
+    @apply border-brand-700 bg-brand-700 text-white hover:border-brand-700;
+  }
+  .pill {
+    @apply inline-block rounded-full bg-brand-100 px-2.5 py-0.5 text-xs font-medium capitalize text-brand-800;
+  }
+  .panel {
+    @apply rounded-2xl border border-brand-100 bg-white p-5 shadow-soft;
+  }
+  .link-btn {
+    @apply text-sm text-slate-500 underline-offset-2 hover:text-brand-800 hover:underline;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Scroll-reveal: <Reveal> adds .reveal-in once the element enters the viewport. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Honour the OS "reduce motion" setting: show everything immediately, no looping animation. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
